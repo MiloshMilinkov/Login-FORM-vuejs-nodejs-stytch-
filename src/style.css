@@ -1,0 +1,15 @@
+:root{
+  --primary: #E11D48;
+  --primary-dark: #C32345;
+  --gray:#9CA3AF;
+  --light: #F3F4F6;
+  --dark: #111827;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+

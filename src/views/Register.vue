@@ -5,7 +5,7 @@
             <h2>Register</h2>
             <p>Login or create and account to start using the app.</p>
         </header>   
-        <form @submit.prevent>
+        <form @submit.prevent = "Register">
             <label>
                 <span>Enter your email</span>
                 <input type="email" v-model="email" placeholder="test@test.com">
@@ -31,10 +31,42 @@
 
 <script setup>
     import { ref } from 'vue';
+    import { useRouter } from 'vue-router';
+
+    const router = useRouter();
 
     const email = ref('');
     const password = ref('');
     const conf_password = ref('');
+
+    const Register = async () => {
+        if (!email.value || !password.value || !conf_password.value){
+            return alert('Please fill in all fields.');
+        }
+
+        if (password.value !== conf_password.value){
+            return alert('Password fo not match.');
+        }
+
+        const res = await fetch('http://localhost:3333/register',{
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email.value,
+                password: password.value
+            })
+        }).then(res => res.json());
+
+        if (res.success){
+            localStorage.setItem('token', res.token);
+            router.push('/');
+        }
+        else{
+            alert(res.message);
+        }
+    }
 </script>
 
 <style scoped>

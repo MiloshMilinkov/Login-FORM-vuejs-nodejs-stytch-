@@ -31,7 +31,7 @@ import { createRouter, createWebHistory } from "vue-router";
     //if to page is guarded
     if(to.matched.some(record => record.meta.requiresAuth)){
 
-        const token =localStorage.getItem('token')
+        const token = localStorage.getItem('token')
 
         //if token exists, we check if the token is valid and return to next
         if (token){
